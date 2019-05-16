@@ -1,12 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-function mapStateToProps(state) {
-    return {
-
-    };
-}
-
 class Register extends Component {
 
     state = {
@@ -23,8 +17,13 @@ class Register extends Component {
         })
     }
 
+    showUsers = () => {
+        
+    }
+
     submitForm = (e) => {
         e.preventDefault();
+        console.log(this.state)
     }
 
     render() {
@@ -64,10 +63,34 @@ class Register extends Component {
                             onChange={e => this.handleInput(e, 'password')}
                         />
                     </div>
+
+                    <button type="submit">Add Admin</button>
                 </form>
+
+                <div className="current_users">
+                    <h4>Current Users:</h4>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Lastname</th>
+                                <th>Email</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {this.showUsers}
+                        </tbody>
+                    </table>
+                </div>
             </div>
         );
     }
+}
+
+function mapStateToProps(state) {
+    return {
+        user: state.user
+    };
 }
 
 export default connect(

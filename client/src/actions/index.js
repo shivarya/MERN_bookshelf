@@ -119,3 +119,13 @@ export function getUserBooks(userId){
         payload: request
     }
 }
+
+export function getUsers(){
+    const request = axios.get(`/api/book/reviewer?user=${userId}`)
+        .then(({ data }) => data);
+
+    return {
+        type: 'GET_USERS',
+        payload: request
+    }
+}

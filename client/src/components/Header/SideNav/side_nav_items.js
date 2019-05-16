@@ -22,7 +22,7 @@ const SideNavItems = props => {
             type:'navItem',
             icon:'file-text-o',
             text:'Add Admins',
-            link:'/user/register',
+            link:'/register',
             restricted:false
         },
         {
