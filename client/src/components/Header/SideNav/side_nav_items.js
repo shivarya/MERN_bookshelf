@@ -43,7 +43,7 @@ const SideNavItems = props => {
             type:'navItem',
             icon:'file-text-o',
             text:'Add Reviews',
-            link:'/user/add-reviews',
+            link:'/user/add',
             restricted:false
         },
         {

@@ -35,16 +35,6 @@ export function getBookWithReviewer(id){
     }
 }
 
-export function getReviewer(ownerId){
-    const request = axios.get(`/api/user/getReviewers?id=${ownerId}`)
-    .then(({data}) => data);
-
-    return {
-        type: 'GET_REVIEWER',
-        payload: request
-    }
-}
-
 export function clearBookWithReviewer(){
     return {
         type:'CLEAR_BOOK_W_REVIEWER',
@@ -52,6 +42,40 @@ export function clearBookWithReviewer(){
             book : {},
             reviewer:{}
         }
+    }
+}
+
+export function addBook(book_data){
+    const req = axios.post(`/api/book`, book_data)
+                .then(res => res.data)
+    return {
+        type: 'ADD_BOOK',
+        payload: req
+    }
+}
+
+export function editBook(book_data) {
+    const req = axios.put(`/api/book`, book_data)
+        .then(res => res.data)
+    return {
+        type: 'EDIT_BOOK',
+        payload: req
+    }
+}
+
+export function deleteBook(bookId) {
+    const req = axios.delete(`/api/book?id=${bookId}`)
+        .then(res => res.data)
+    return {
+        type: 'DELETE_BOOK',
+        payload: req
+    }
+}
+
+export function clearNewBook(){
+    return {
+        type: 'CLEAR_NEW_BOOK',
+        payload: null
     }
 }
 
@@ -73,5 +97,25 @@ export function auth(){
     return {
         type: 'USER_AUTH',
         payload:req
+    }
+}
+
+export function getReviewer(ownerId) {
+    const request = axios.get(`/api/user/getReviewers?id=${ownerId}`)
+        .then(({ data }) => data);
+
+    return {
+        type: 'GET_REVIEWER',
+        payload: request
+    }
+}
+
+export function getUserBooks(userId){
+    const request = axios.get(`/api/book/reviewer?user=${userId}`)
+        .then(({ data }) => data);
+
+    return {
+        type: 'GET_REVIEW',
+        payload: request
     }
 }

@@ -9,10 +9,14 @@ users.get('/getReviewers/', (req,res) => {
     let id = req.query.id;
     User.findById(id,(err,user) => {
         if(err) return res.status(400).send(err)
-        res.json({
-            name: user.name,
-            lastname: user.lastname
-        })
+        if(user){
+            res.json({
+                name: user.name,
+                lastname: user.lastname
+            })
+        }else{
+            res.json()
+        }
    })
     
 })

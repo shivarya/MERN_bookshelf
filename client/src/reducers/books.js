@@ -16,6 +16,27 @@ export default function(state = {}, action) {
         ...state,
         book:action.payload.book,
         reviewer:action.payload.reviewer
+      }; 
+    case "ADD_BOOK":
+      return {
+        ...state,
+        newbook: action.payload
+      };
+    case "EDIT_BOOK":
+      return {
+        ...state,
+        newbook: action.payload
+      };
+    case "DELETE_BOOK":
+      return {
+        ...state,
+        delete: action.payload
+      };
+    case "CLEAR_NEW_BOOK":
+      return {
+        ...state,
+        newbook: action.payload,
+        delete: null
       };
      
     default:

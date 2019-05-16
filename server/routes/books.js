@@ -23,7 +23,7 @@ books.get("/books", (req, res) => {
     })
  });
 
- books.get('/user',(req,res) => {
+ books.get('/reviewer',(req,res) => {
      Book.find({ownerId:req.query.user},(err,book) => {
         if(err) return res.status(400).send(err)
         res.json(book)
