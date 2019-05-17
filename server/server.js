@@ -13,6 +13,9 @@ const app = express();
 app.use(bodyParser.json());
 app.use(cookieParser());
 
+//in production build
+app.use(express.static('client/build'))
+
 // mongoose
 mongoose.Promise = global.Promise;
 mongoose.set('useCreateIndex', true); //creta index in mongo
@@ -27,9 +30,6 @@ const users = require('./routes/users')
 app.use('/api/user',users)
 app.use('/api/book',books)
 
-app.get("/", (req, res) => {
-    res.send("Server working 🔥");
-});
 
 app.get('/api/auth',auth, (req,res) => {
     if(req.user){
@@ -46,6 +46,13 @@ app.get('/api/auth',auth, (req,res) => {
         })
     }
 })
+
+if(process.env.NODE_ENV === "production"){
+    const path = require('path')
+    app.get("/*", (req, res) => {
+        res.sendFile(path.resolve(__dirname,'../client','build','index.html'));
+    });
+}
 
 
 
