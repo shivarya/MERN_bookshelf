@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { getUsers, addUser } from '../../actions';
 
 class Register extends Component {
 
@@ -11,24 +12,51 @@ class Register extends Component {
         error:''
     }
 
+    componentWillMount(){
+        this.props.dispatch(getUsers());
+    }
+
     handleInput = (e, name) => {
         this.setState({
             [name]: e.target.value
         })
     }
 
-    showUsers = () => {
-        
+    showUsers = (users) => {
+        return users.map((item,i) => (
+            <tr key={i}>
+                <td>{item.name}</td>
+                <td>{item.lastname}</td>
+                <td>{item.email}</td>
+            </tr>
+        ))
     }
 
     submitForm = (e) => {
         e.preventDefault();
-        console.log(this.state)
+        this.setState({error:''})
+        this.props.dispatch(addUser(this.state,this.props.user.users))
+    }
+
+    componentWillReceiveProps(nextProps){
+        if(nextProps.user.success === false){
+            this.setState({error:'Error'})
+        }else{
+            this.setState({
+                name: '',
+                lastname: '',
+                email: '',
+                password: '',
+                error: '' 
+            })
+        }
     }
 
     render() {
+        let user = this.props.user;
         return (
             <div className="rl_container">
+                {this.state.error}
                 <form onSubmit={this.submitForm}>
                     <h2>Add User</h2>
                     <div className="form_element">
@@ -78,7 +106,11 @@ class Register extends Component {
                             </tr>
                         </thead>
                         <tbody>
-                            {this.showUsers}
+                            {
+                                user.users ?
+                                    this.showUsers(user.users)
+                                    : null
+                            }
                         </tbody>
                     </table>
                 </div>

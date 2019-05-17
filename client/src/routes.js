@@ -11,6 +11,7 @@ import AddBook from './containers/Admin/add';
 import userPosts from './containers/Admin/userPosts';
 import editPosts from './containers/Admin/editPosts';
 import Register from './containers/Admin/register';
+import Logout from './containers/Admin/logout';
 
 const Routes = () => {
     return (
@@ -24,6 +25,7 @@ const Routes = () => {
                 <Route path="/user/user-reviews" exact component={Auth(userPosts, true)} />
                 <Route path="/user/edit-post/:bookId" exact component={Auth(editPosts, true)} />
                 <Route path="/register" exact component={Auth(Register, true)} />
+                <Route path="/logout" exact component={Auth(Logout, true)} />
             </Switch>
         </Layout>
     );

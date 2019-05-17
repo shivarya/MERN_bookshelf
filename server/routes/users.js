@@ -38,8 +38,8 @@ users.post("/register", (req,res) => {
     user.save((err,doc) => {
         if(err) return res.status(400).send({success:false})
         res.status(200).json({
-            post: true,
-            bookId: doc._id
+            success: true,
+            user: doc
         })
     })
 })

@@ -121,11 +121,29 @@ export function getUserBooks(userId){
 }
 
 export function getUsers(){
-    const request = axios.get(`/api/book/reviewer?user=${userId}`)
+    const request = axios.get(`/api/user/users`)
         .then(({ data }) => data);
 
     return {
         type: 'GET_USERS',
         payload: request
+    }
+}
+
+export function addUser(user,userList){
+    const req = axios.post(`/api/user/register`,user)
+
+    return (dispatch) => {
+        req.then(({data}) => {
+            let res = {
+                success: data.success,
+                users:data.success ? [...userList,data.user] : [...userList]
+            }
+
+            dispatch({
+                type: 'ADD_USER',
+                payload: res
+            })
+        })
     }
 }
