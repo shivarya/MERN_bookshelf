@@ -19,7 +19,7 @@ app.use(express.static('client/build'))
 // mongoose
 mongoose.Promise = global.Promise;
 mongoose.set('useCreateIndex', true); //creta index in mongo
-mongoose.connect(config.database, { useNewUrlParser: true })
+mongoose.connect(config.database, { useNewUrlParser: true, retryWrites: false })
     .then(() => console.log("Mondodb Connected"))
     .catch(err => console.error(err));
 
