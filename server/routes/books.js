@@ -17,7 +17,8 @@ books.get("/books", (req, res) => {
     let skip = parseInt(req.query.skip) || 0;
     let limit = parseInt(req.query.limit) || 10;
     let order = req.query.order || "asc";
-    Book.find().skip(skip).sort({name:order}).limit(limit).exec((err,books) => {
+    //Book.find().skip(skip).sort({name:order}).limit(limit).exec((err,books) => { //not work in cosmos db
+    Book.find().skip(skip).limit(limit).exec((err,books) => {
         if(err) return res.status(400).send(err)
         res.json(books)
     })
