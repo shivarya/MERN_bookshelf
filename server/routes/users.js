@@ -25,7 +25,7 @@ users.get("/users", (req, res) => {
     let skip = parseInt(req.query.skip) || 0;
     let limit = parseInt(req.query.limit) || 10;
     let order = req.query.order || "asc";
-    User.find().skip(skip).sort({name:order}).limit(limit).exec((err,users) => {
+    User.find().skip(skip).limit(limit).exec((err,users) => {
         if(err) return res.status(400).send(err)
         res.json(users)
     })
