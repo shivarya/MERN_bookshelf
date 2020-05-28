@@ -80,8 +80,8 @@ User.statics.findByToken = function(token,cb){
     })
 }
 
-User.methods.deleteToken = function(token,cb){
-    this.update({$unset:{token:1}}, (err,user) => {
+User.methods.deleteToken = function(cb){
+    this.update({$unset:{token:null}}, (err,user) => {
         if(err) return cb(err)
         cb(null,user)
     })

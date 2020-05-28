@@ -55,11 +55,12 @@ users.post("/login",(req,res) => {
             //give a token
             user.generateToken((err,user) => {
                 if(err) return res.status(400).send({success:false})
-                res.cookie("auth",user.token).json({
+                res.json({
                     success: true,
                     isAuth: true,
                     id: user._id,
-                    email: user.email
+                    email: user.email,
+                    token: user.token
                 })
             })
         })
@@ -68,12 +69,12 @@ users.post("/login",(req,res) => {
 
 users.get('/logout', auth, (req,res) => {
     if(req.user){
-        req.user.deleteToken(req.token, (err,user) => {
+        req.user.deleteToken((err) => {
             if(err) return res.status(400).send({success:false})
-            res.clearCookie('auth').sendStatus(200)
+            res.sendStatus(200)
         })
     }else{
-        res.clearCookie('auth').sendStatus(200)
+        res.sendStatus(200)
     }
 })
 
