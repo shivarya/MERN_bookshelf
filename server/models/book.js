@@ -29,11 +29,10 @@ const Book = new Schema({
     price:{
         type: String,
         default:'N/A'
+    },
+    ownerId:{
+        type: String,
     }
-    // ownerId:{
-    //     type: String,
-    //     required:true
-    // }
 },{timestamps:true});
 
 
